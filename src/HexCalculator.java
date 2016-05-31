@@ -27,9 +27,6 @@ public class HexCalculator// extends Calculator
 		gui.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		// new Calculator();
-		new HexCalculator();
-	}
+
 
 }
