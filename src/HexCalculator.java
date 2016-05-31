@@ -17,7 +17,7 @@ public class HexCalculator// extends Calculator
 	public HexCalculator() {
 		engine = new HexCalcEngine();
 		gui = new HexUserInterface(engine);
-
+		
 	}
 
 	/**

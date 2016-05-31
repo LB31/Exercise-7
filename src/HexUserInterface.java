@@ -13,6 +13,7 @@ public class HexUserInterface extends UserInterface {
 
 	private JCheckBox hexCheckbox;
 	private JPanel buttonPanel2;
+	private String input;
 
 	public HexUserInterface(CalcEngine engine) {
 		super(engine);
@@ -21,20 +22,8 @@ public class HexUserInterface extends UserInterface {
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 
-		if (command.equals("0") || command.equals("1") || command.equals("2") || command.equals("3")
-				|| command.equals("4") || command.equals("5") || command.equals("6") || command.equals("7")
-				|| command.equals("8") || command.equals("9") || command.equals("A") || command.equals("B")
-				|| command.equals("C") || command.equals("D") || command.equals("E") || command.equals("F")) {
-			int number = Integer.parseInt(command, 16);
-			calc.numberPressed(number);
-		} else if (command.equals("+")) {
-			calc.plus();
-		} else if (command.equals("-")) {
-			calc.minus();
-		} else if (command.equals("*")) {
-			calc.multiply();
-		} else if (command.equals("=")) {
-			calc.equals();
+		if (command.equals("=")) {
+			calc.equals(input);
 		} else if (command.equals("CLR")) {
 			calc.clear();
 		} else if (command.equals("?")) {
@@ -45,11 +34,19 @@ public class HexUserInterface extends UserInterface {
 			} else {
 				((HexCalcEngine) calc).setBase(16);
 			}
+			
 
 			buttonPanel2.setVisible(!hexCheckbox.isSelected());
 
 			redisplay();
 		}
+		
+	
+	  else {
+		int number = Integer.parseInt(command, 16);
+      	input += ""+number;
+      	((HexCalcEngine) calc).numberPressed(number);
+      }
 		// else unknown command.
 
 		redisplay();

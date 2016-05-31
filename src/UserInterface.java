@@ -135,7 +135,7 @@ public class UserInterface
             calc.multiply();
         }
         else if(command.equals("=")) {
-            calc.equals();
+            calc.equals("test");
         }
         else if(command.equals("C")) {
             calc.clear();
