@@ -125,24 +125,7 @@ public class UserInterface
             int number = Integer.parseInt(command);
             calc.numberPressed(number);
         }
-        else if(command.equals("+")) {
-            calc.plus();
-        }
-        else if(command.equals("-")) {
-            calc.minus();
-        }
-        else if(command.equals("*")) {
-            calc.multiply();
-        }
-        else if(command.equals("=")) {
-            calc.equals("test");
-        }
-        else if(command.equals("C")) {
-            calc.clear();
-        }
-        else if(command.equals("?")) {
-            showInfo();
-        }
+        
         // else unknown command.
 
         redisplay();

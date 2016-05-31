@@ -59,23 +59,7 @@ public class CalcEngine {
 		}
 	}
 
-	/**
-	 * The 'plus' button was pressed.
-	 */
-	public void plus() {
-		applyOperator('+');
-	}
-
-	/**
-	 * The 'minus' button was pressed.
-	 */
-	public void minus() {
-		applyOperator('-');
-	}
-
-	public void multiply() {
-		applyOperator('*');
-	}
+	
 
 	/**
 	 * The '=' button was pressed.
@@ -88,8 +72,8 @@ public class CalcEngine {
 		 * if(haveLeftOperand && lastOperator != '?' && buildingDisplayValue) {
 		 * calculateResult(); //postfix method lastOperator = '?';
 		 */
-
-		displayValue = pfx.evaluate(input);
+		String postfix = pfx.infixToPostfix(input);
+		displayValue = pfx.evaluate(postfix);
 		buildingDisplayValue = false;
 
 	}
@@ -129,56 +113,14 @@ public class CalcEngine {
 	 * Combine leftOperand, lastOperator, and the current display value. The
 	 * result becomes both the leftOperand and the new display value.
 	 */
-	private void calculateResult() {
-		switch (lastOperator) {
-		case '+':
-			displayValue = leftOperand + displayValue;
-			haveLeftOperand = true;
-			leftOperand = displayValue;
-			break;
-		case '-':
-			displayValue = leftOperand - displayValue;
-			haveLeftOperand = true;
-			leftOperand = displayValue;
-			break;
-		case '*':
-			displayValue = leftOperand * displayValue;
-			haveLeftOperand = true;
-			leftOperand = displayValue;
-			break;
-		default:
-			keySequenceError();
-			break;
-		}
-	}
-
+	
 	/**
 	 * Apply an operator.
 	 * 
 	 * @param operator
 	 *            The operator to apply.
 	 */
-	private void applyOperator(char operator) {
-		// If we are not in the process of building a new operand
-		// then it is an error, unless we have just calculated a
-		// result using '='.
-		if (!buildingDisplayValue && !(haveLeftOperand && lastOperator == '?')) {
-			keySequenceError();
-			return;
-		}
-
-		if (lastOperator != '?') {
-			// First apply the previous operator.
-			calculateResult();
-		} else {
-			// The displayValue now becomes the left operand of this
-			// new operator.
-			haveLeftOperand = true;
-			leftOperand = displayValue;
-		}
-		lastOperator = operator;
-		buildingDisplayValue = false;
-	}
+	
 
 	/**
 	 * Report an error in the sequence of keys that was pressed.
